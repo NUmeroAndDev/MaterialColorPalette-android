@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.numero.colorpalette.R;
+import com.numero.colorpalette.util.ColorUtil;
 
 import io.reactivex.Observable;
 
@@ -63,9 +64,14 @@ public class ColorStateView extends FrameLayout {
         setVisibility(VISIBLE);
         Observable.just(colorCode)
                 .map(Color::parseColor)
-                .subscribe(color -> {
+                .doOnNext(color -> {
                     setVisibility(VISIBLE);
                     setBackgroundColor(color);
+                })
+                .map(ColorUtil::getTextColor)
+                .subscribe(color -> {
+                    titleTextView.setTextColor(color);
+                    colorCodeTextView.setTextColor(color);
                 }, throwable -> setVisibility(GONE));
     }
 
