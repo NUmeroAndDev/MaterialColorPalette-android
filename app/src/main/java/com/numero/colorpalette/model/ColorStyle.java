@@ -99,7 +99,6 @@ public enum ColorStyle {
 
 
     private int nameStringRes;
-    // FIXME 色モデルに書き換える
     private MaterialColor color;
 
     ColorStyle(@StringRes int nameStringRes, MaterialColor color) {
