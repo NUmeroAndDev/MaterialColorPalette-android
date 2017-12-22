@@ -1,6 +1,8 @@
 package com.numero.colorpalette.model.color;
 
-public class MaterialColor {
+import java.io.Serializable;
+
+public class MaterialColor implements Serializable {
 
     private String color50;
     private String color100;
