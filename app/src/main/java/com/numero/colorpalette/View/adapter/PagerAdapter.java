@@ -1,4 +1,4 @@
-package com.numero.colorpalette.View.Adapter;
+package com.numero.colorpalette.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
