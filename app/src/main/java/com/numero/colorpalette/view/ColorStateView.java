@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.numero.colorpalette.R;
 
+import io.reactivex.Observable;
+
 public class ColorStateView extends FrameLayout {
 
     private View parentLayout;
@@ -59,12 +61,12 @@ public class ColorStateView extends FrameLayout {
             return;
         }
         setVisibility(VISIBLE);
-        try {
-            int color = Color.parseColor(colorCode);
-            setBackgroundColor(color);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Observable.just(colorCode)
+                .map(Color::parseColor)
+                .subscribe(color -> {
+                    setVisibility(VISIBLE);
+                    setBackgroundColor(color);
+                }, throwable -> setVisibility(GONE));
     }
 
     @Override

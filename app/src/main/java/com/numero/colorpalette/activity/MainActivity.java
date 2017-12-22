@@ -18,6 +18,8 @@ import com.numero.colorpalette.model.ColorStyle;
 import com.numero.colorpalette.model.color.MaterialColor;
 import com.numero.colorpalette.view.adapter.PagerAdapter;
 
+import io.reactivex.Observable;
+
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     private Toolbar toolbar;
@@ -81,10 +83,20 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
     private void setToolbarColor(@NonNull MaterialColor materialColor) {
-        toolbar.setBackgroundColor(Color.parseColor(materialColor.getColor500()));
-        appBarLayout.setBackgroundColor(Color.parseColor(materialColor.getColor500()));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor(materialColor.getColor700()));
-        }
+        Observable.just(materialColor)
+                .map(MaterialColor::getColor500)
+                .map(Color::parseColor)
+                .subscribe(color -> {
+                    toolbar.setBackgroundColor(color);
+                    appBarLayout.setBackgroundColor(color);
+                });
+        Observable.just(materialColor)
+                .map(MaterialColor::getColor700)
+                .map(Color::parseColor)
+                .subscribe(color -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getWindow().setStatusBarColor(color);
+                    }
+                });
     }
 }
