@@ -2,6 +2,7 @@ package com.numero.colorpalette.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -16,7 +17,7 @@ public class ColorStateView extends FrameLayout {
 
     private View parentLayout;
     private TextView titleTextView;
-    private TextView colorNameTextView;
+    private TextView colorCodeTextView;
 
     public ColorStateView(@NonNull Context context) {
         this(context, null);
@@ -35,6 +36,8 @@ public class ColorStateView extends FrameLayout {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ColorStateView);
         String title = a.getString(R.styleable.ColorStateView_title);
         setTitle(title);
+        String colorCode = a.getString(R.styleable.ColorStateView_colorCode);
+        setColorCode(colorCode);
         a.recycle();
     }
 
@@ -42,15 +45,26 @@ public class ColorStateView extends FrameLayout {
         parentLayout = view.findViewById(R.id.parent_layout);
 
         titleTextView = view.findViewById(R.id.title_text_view);
-        colorNameTextView = view.findViewById(R.id.color_name_text);
+        colorCodeTextView = view.findViewById(R.id.color_code_text);
     }
 
     public void setTitle(@Nullable String titleString) {
         titleTextView.setText(titleString);
     }
 
-    public void setColorName(@Nullable String colorName) {
-        colorNameTextView.setText(colorName);
+    public void setColorCode(@Nullable String colorCode) {
+        colorCodeTextView.setText(colorCode);
+        if (colorCode == null || colorCode.isEmpty()) {
+            setVisibility(GONE);
+            return;
+        }
+        setVisibility(VISIBLE);
+        try {
+            int color = Color.parseColor(colorCode);
+            setBackgroundColor(color);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

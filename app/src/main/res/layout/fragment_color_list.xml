@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="materialColor"
+            type="com.numero.colorpalette.model.color.MaterialColor" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_50_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color50}"
+                app:title="50" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_100_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color100}"
+                app:title="100" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_200_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color200}"
+                app:title="200" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_300_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color300}"
+                app:title="300" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_400_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color400}"
+                app:title="400" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_500_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color500}"
+                app:title="500" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_600_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color600}"
+                app:title="600" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_700_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color700}"
+                app:title="700" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_800_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color800}"
+                app:title="800" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_900_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.color900}"
+                app:title="900" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_a100_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.colorA100}"
+                app:title="A100" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_a200_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.colorA200}"
+                app:title="A200" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_a400_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.colorA400}"
+                app:title="A400" />
+
+            <com.numero.colorpalette.view.ColorStateView
+                android:id="@+id/color_state_a700_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:colorCode="@{materialColor.colorA700}"
+                app:title="A700" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>
