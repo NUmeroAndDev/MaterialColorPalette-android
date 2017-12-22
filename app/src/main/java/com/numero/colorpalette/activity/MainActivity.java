@@ -1,5 +1,9 @@
 package com.numero.colorpalette.activity;
 
+import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,28 +14,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.numero.colorpalette.R;
+import com.numero.colorpalette.model.ColorStyle;
+import com.numero.colorpalette.model.color.MaterialColor;
 import com.numero.colorpalette.view.adapter.PagerAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
-    private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
+    private Toolbar toolbar;
+    private AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        pagerAdapter = new PagerAdapter(getApplicationContext(), getSupportFragmentManager());
+        appBarLayout = findViewById(R.id.appbar);
 
-        viewPager = findViewById(R.id.container);
+        PagerAdapter pagerAdapter = new PagerAdapter(getApplicationContext(), getSupportFragmentManager());
+
+        ViewPager viewPager = findViewById(R.id.container);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(this);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        MaterialColor color = ColorStyle.values()[0].getColor();
+        setToolbarColor(color);
     }
 
 
@@ -49,5 +61,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (position >= ColorStyle.values().length) {
+            return;
+        }
+        MaterialColor color = ColorStyle.values()[position].getColor();
+        setToolbarColor(color);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
+
+    private void setToolbarColor(@NonNull MaterialColor materialColor) {
+        toolbar.setBackgroundColor(Color.parseColor(materialColor.getColor500()));
+        appBarLayout.setBackgroundColor(Color.parseColor(materialColor.getColor500()));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.parseColor(materialColor.getColor700()));
+        }
     }
 }
