@@ -4,7 +4,8 @@
     tools:context=".activity.AboutActivity">
     <item
         android:id="@+id/action_view_source"
+        android:icon="@drawable/ic_github"
         android:orderInCategory="100"
         android:title="@string/action_view_source"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>
