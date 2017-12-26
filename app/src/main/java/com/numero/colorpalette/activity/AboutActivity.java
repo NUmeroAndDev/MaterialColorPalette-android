@@ -2,6 +2,7 @@ package com.numero.colorpalette.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -48,9 +49,15 @@ public class AboutActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_view_source:
-                // TODO open Github site
+                startSourceView();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startSourceView() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(getString(R.string.source_url)));
+        startActivity(intent);
     }
 }
