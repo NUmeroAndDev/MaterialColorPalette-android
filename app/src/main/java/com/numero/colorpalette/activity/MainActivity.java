@@ -1,5 +1,8 @@
 package com.numero.colorpalette.activity;
 
+import android.content.ClipData;
+import android.content.ClipDescription;
+import android.content.ClipboardManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -12,15 +15,17 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.numero.colorpalette.R;
+import com.numero.colorpalette.fragment.ColorListFragment;
 import com.numero.colorpalette.model.ColorStyle;
 import com.numero.colorpalette.model.color.MaterialColor;
 import com.numero.colorpalette.view.adapter.PagerAdapter;
 
 import io.reactivex.Observable;
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, ColorListFragment.ColorListFragmentListener {
 
     private Toolbar toolbar;
     private AppBarLayout appBarLayout;
@@ -98,5 +103,19 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                         getWindow().setStatusBarColor(color);
                     }
                 });
+    }
+
+    @Override
+    public void onClickColor(@NonNull String color) {
+        copyText(color);
+        Toast.makeText(this, String.format("Copied color : %s", color), Toast.LENGTH_SHORT).show();
+    }
+
+    private void copyText(@NonNull String text) {
+        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        if (clipboardManager == null) {
+            return;
+        }
+        clipboardManager.setPrimaryClip(new ClipData(new ClipDescription("copied color", new String[]{ClipDescription.MIMETYPE_TEXT_URILIST}), new ClipData.Item(text)));
     }
 }
