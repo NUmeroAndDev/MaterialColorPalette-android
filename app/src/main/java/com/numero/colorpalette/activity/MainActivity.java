@@ -10,17 +10,19 @@ import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.numero.colorpalette.R;
+import com.numero.colorpalette.fragment.ColorListFragment;
 import com.numero.colorpalette.model.ColorStyle;
 import com.numero.colorpalette.model.color.MaterialColor;
 import com.numero.colorpalette.view.adapter.PagerAdapter;
 
 import io.reactivex.Observable;
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, ColorListFragment.ColorListFragmentListener {
 
     private Toolbar toolbar;
     private AppBarLayout appBarLayout;
@@ -98,5 +100,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                         getWindow().setStatusBarColor(color);
                     }
                 });
+    }
+
+    @Override
+    public void onClickColor(String color) {
+        
     }
 }
