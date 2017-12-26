@@ -1,10 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.AboutActivity">
     <item
-        android:id="@+id/action_about_app"
+        android:id="@+id/action_view_source"
+        android:icon="@drawable/ic_github"
         android:orderInCategory="100"
-        android:title="@string/about_app"
-        app:showAsAction="never" />
+        android:title="@string/action_view_source"
+        app:showAsAction="always" />
 </menu>
