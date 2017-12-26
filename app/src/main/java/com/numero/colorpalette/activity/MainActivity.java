@@ -57,12 +57,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            startActivity(AboutActivity.createIntent(this));
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_about_app:
+                startActivity(AboutActivity.createIntent(this));
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
