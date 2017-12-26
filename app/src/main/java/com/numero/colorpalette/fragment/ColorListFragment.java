@@ -55,6 +55,6 @@ public class ColorListFragment extends Fragment {
     }
 
     public interface ColorListFragmentListener {
-        void onClickColor(String color);
+        void onClickColor(@NonNull String color);
     }
 }

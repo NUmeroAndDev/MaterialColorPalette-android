@@ -1,5 +1,8 @@
 package com.numero.colorpalette.activity;
 
+import android.content.ClipData;
+import android.content.ClipDescription;
+import android.content.ClipboardManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -10,9 +13,9 @@ import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.numero.colorpalette.R;
 import com.numero.colorpalette.fragment.ColorListFragment;
@@ -103,7 +106,16 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
     @Override
-    public void onClickColor(String color) {
-        
+    public void onClickColor(@NonNull String color) {
+        copyText(color);
+        Toast.makeText(this, String.format("Copied color : %s", color), Toast.LENGTH_SHORT).show();
+    }
+
+    private void copyText(@NonNull String text) {
+        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        if (clipboardManager == null) {
+            return;
+        }
+        clipboardManager.setPrimaryClip(new ClipData(new ClipDescription("copied color", new String[]{ClipDescription.MIMETYPE_TEXT_URILIST}), new ClipData.Item(text)));
     }
 }
