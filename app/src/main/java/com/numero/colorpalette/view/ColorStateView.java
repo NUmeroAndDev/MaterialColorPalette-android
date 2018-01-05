@@ -68,7 +68,7 @@ public class ColorStateView extends FrameLayout {
                     setVisibility(VISIBLE);
                     setBackgroundColor(color);
                 })
-                .map(ColorUtil::getTextColor)
+                .map(ColorUtil.INSTANCE::getTextColor)
                 .subscribe(color -> {
                     titleTextView.setTextColor(color);
                     colorCodeTextView.setTextColor(color);
