@@ -21,7 +21,7 @@ class ColorStateView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     var colorCodeText: String? = null
         set(value) {
-            if (value == null || value.isEmpty()) {
+            if (value.isNullOrEmpty()) {
                 visibility = View.GONE
                 return
             }
@@ -29,15 +29,17 @@ class ColorStateView @JvmOverloads constructor(context: Context, attrs: Attribut
             visibility = View.VISIBLE
             Observable.just(value)
                     .map { Color.parseColor(it) }
-                    .doOnNext { color ->
+                    .doOnNext {
                         visibility = View.VISIBLE
-                        setBackgroundColor(color!!)
+                        setBackgroundColor(it)
                     }
                     .map { ColorUtil.getTextColor(it) }
-                    .subscribe({ color ->
-                        titleTextView.setTextColor(color!!)
-                        colorCodeTextView.setTextColor(color)
-                    }) { visibility = View.GONE }
+                    .subscribe({
+                        titleTextView.setTextColor(it)
+                        colorCodeTextView.setTextColor(it)
+                    }, {
+                        visibility = View.GONE
+                    })
         }
 
     init {
@@ -50,6 +52,6 @@ class ColorStateView @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     override fun setOnClickListener(l: View.OnClickListener?) {
-        parentLayout!!.setOnClickListener(l)
+        parentLayout.setOnClickListener(l)
     }
 }

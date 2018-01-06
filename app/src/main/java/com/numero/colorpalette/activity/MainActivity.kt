@@ -73,16 +73,16 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener, ColorL
         Observable.just(materialColor)
                 .map { it.color500 }
                 .map { Color.parseColor(it) }
-                .subscribe { color ->
-                    toolbar!!.setBackgroundColor(color!!)
-                    appbar!!.setBackgroundColor(color)
+                .subscribe {
+                    toolbar.setBackgroundColor(it)
+                    appbar.setBackgroundColor(it)
                 }
         Observable.just(materialColor)
                 .map { it.color700 }
                 .map { Color.parseColor(it) }
-                .subscribe { color ->
+                .subscribe {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        window.statusBarColor = color!!
+                        window.statusBarColor = it
                     }
                 }
     }
