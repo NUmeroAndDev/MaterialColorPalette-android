@@ -45,9 +45,9 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun startSourceView() {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(getString(R.string.source_url))
-        startActivity(intent)
+        startActivity(Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(getString(R.string.source_url))
+        })
     }
 
     companion object {

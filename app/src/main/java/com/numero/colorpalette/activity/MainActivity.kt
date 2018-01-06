@@ -32,8 +32,10 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener, ColorL
 
         val pagerAdapter = PagerAdapter(applicationContext, supportFragmentManager)
 
-        viewPager.adapter = pagerAdapter
-        viewPager.addOnPageChangeListener(this)
+        viewPager.apply {
+            adapter = pagerAdapter
+            addOnPageChangeListener(this@MainActivity)
+        }
 
         tabs.setupWithViewPager(viewPager)
 
@@ -87,10 +89,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener, ColorL
                 }
     }
 
-    override fun onClickColor(color: String?) {
-        if (color == null) {
-            return
-        }
+    override fun onClickColor(color: String) {
         copyText(color)
         Toast.makeText(this, String.format("Copied color : %s", color), Toast.LENGTH_SHORT).show()
     }
