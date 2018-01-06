@@ -87,7 +87,10 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener, ColorL
                 }
     }
 
-    override fun onClickColor(color: String) {
+    override fun onClickColor(color: String?) {
+        if (color == null) {
+            return
+        }
         copyText(color)
         Toast.makeText(this, String.format("Copied color : %s", color), Toast.LENGTH_SHORT).show()
     }
