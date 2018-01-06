@@ -6,10 +6,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 
 import android.support.v4.view.ViewPager
 import android.os.Bundle
@@ -23,29 +20,22 @@ import com.numero.colorpalette.model.ColorStyle
 import com.numero.colorpalette.model.color.MaterialColor
 import com.numero.colorpalette.view.adapter.PagerAdapter
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener, ColorListFragment.ColorListFragmentListener {
-
-    private var toolbar: Toolbar? = null
-    private var appBarLayout: AppBarLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
-        appBarLayout = findViewById(R.id.appbar)
 
         val pagerAdapter = PagerAdapter(applicationContext, supportFragmentManager)
 
-        val viewPager = findViewById<ViewPager>(R.id.container)
         viewPager.adapter = pagerAdapter
         viewPager.addOnPageChangeListener(this)
 
-        val tabLayout = findViewById<TabLayout>(R.id.tabs)
-        tabLayout.setupWithViewPager(viewPager)
+        tabs.setupWithViewPager(viewPager)
 
         val color = ColorStyle.values()[0].color
         setToolbarColor(color)
@@ -83,27 +73,32 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener, ColorL
         Observable.just(materialColor)
                 .map { it.color500 }
                 .map { Color.parseColor(it) }
-                .subscribe { color ->
-                    toolbar!!.setBackgroundColor(color!!)
-                    appBarLayout!!.setBackgroundColor(color)
+                .subscribe {
+                    toolbar.setBackgroundColor(it)
+                    appbar.setBackgroundColor(it)
                 }
         Observable.just(materialColor)
                 .map { it.color700 }
                 .map { Color.parseColor(it) }
-                .subscribe { color ->
+                .subscribe {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        window.statusBarColor = color!!
+                        window.statusBarColor = it
                     }
                 }
     }
 
-    override fun onClickColor(color: String) {
+    override fun onClickColor(color: String?) {
+        if (color == null) {
+            return
+        }
         copyText(color)
         Toast.makeText(this, String.format("Copied color : %s", color), Toast.LENGTH_SHORT).show()
     }
 
     private fun copyText(text: String) {
-        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        clipboardManager.primaryClip = ClipData(ClipDescription("copied color", arrayOf(ClipDescription.MIMETYPE_TEXT_URILIST)), ClipData.Item(text))
+        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE)
+        if (clipboardManager is ClipboardManager) {
+            clipboardManager.primaryClip = ClipData(ClipDescription("copied color", arrayOf(ClipDescription.MIMETYPE_TEXT_URILIST)), ClipData.Item(text))
+        }
     }
 }
