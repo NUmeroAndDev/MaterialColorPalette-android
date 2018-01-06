@@ -5,13 +5,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 
 import com.numero.colorpalette.BuildConfig
 import com.numero.colorpalette.R
+import kotlinx.android.synthetic.main.activity_about.*
 
 class AboutActivity : AppCompatActivity() {
 
@@ -19,15 +18,11 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        if (supportActionBar != null) {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val textView = findViewById<TextView>(R.id.version_text_view)
-        textView.text = String.format("Ver %s", BuildConfig.VERSION_NAME)
+        versionTextView.text = String.format("Ver %s", BuildConfig.VERSION_NAME)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

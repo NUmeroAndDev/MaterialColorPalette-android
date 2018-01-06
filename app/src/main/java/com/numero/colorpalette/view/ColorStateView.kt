@@ -33,10 +33,10 @@ class ColorStateView @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     private fun initViews(view: View) {
-        parentLayout = view.findViewById(R.id.parent_layout)
+        parentLayout = view.findViewById(R.id.parentLayout)
 
-        titleTextView = view.findViewById(R.id.title_text_view)
-        colorCodeTextView = view.findViewById(R.id.color_code_text)
+        titleTextView = view.findViewById(R.id.titleTextView)
+        colorCodeTextView = view.findViewById(R.id.colorCodeTextView)
     }
 
     fun setTitle(titleString: String?) {

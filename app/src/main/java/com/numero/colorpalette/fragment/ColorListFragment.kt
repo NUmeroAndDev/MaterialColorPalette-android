@@ -27,16 +27,17 @@ class ColorListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            materialColor = arguments!!.getSerializable(BUNDLE_MATERIAL_COLOR) as MaterialColor
+        val serializable = arguments?.getSerializable(BUNDLE_MATERIAL_COLOR)
+        if (serializable is MaterialColor) {
+            materialColor = serializable
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentColorListBinding>(inflater, R.layout.fragment_color_list, container, false)
-        binding.setMaterialColor(materialColor)
-        binding.setListener(listener)
-        return binding.getRoot()
+        binding.materialColor = materialColor
+        binding.listener = listener
+        return binding.root
     }
 
     interface ColorListFragmentListener {
