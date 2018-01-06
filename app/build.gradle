@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 def versionMajor = 1
 def versionMinor = 0
 def versionPatch = 0
@@ -59,9 +61,13 @@ dependencies {
 
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
+    kapt 'com.android.databinding:compiler:3.0.1'
+
     implementation "com.android.support:design:${supportLibraryVersion}"
     implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
 }
