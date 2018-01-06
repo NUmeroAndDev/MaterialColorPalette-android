@@ -3,25 +3,7 @@ package com.numero.colorpalette.model
 import android.support.annotation.StringRes
 
 import com.numero.colorpalette.R
-import com.numero.colorpalette.model.color.Amber
-import com.numero.colorpalette.model.color.Blue
-import com.numero.colorpalette.model.color.BlueGrey
-import com.numero.colorpalette.model.color.Brown
-import com.numero.colorpalette.model.color.Cyan
-import com.numero.colorpalette.model.color.DeepOrange
-import com.numero.colorpalette.model.color.DeepPurple
-import com.numero.colorpalette.model.color.Grey
-import com.numero.colorpalette.model.color.Indigo
-import com.numero.colorpalette.model.color.LightBlue
-import com.numero.colorpalette.model.color.LightGreen
-import com.numero.colorpalette.model.color.Lime
-import com.numero.colorpalette.model.color.MaterialColor
-import com.numero.colorpalette.model.color.Orange
-import com.numero.colorpalette.model.color.Pink
-import com.numero.colorpalette.model.color.Purple
-import com.numero.colorpalette.model.color.Red
-import com.numero.colorpalette.model.color.Teal
-import com.numero.colorpalette.model.color.Yellow
+import com.numero.colorpalette.model.color.*
 
 enum class ColorStyle constructor(@param:StringRes @get:StringRes val nameStringRes: Int, val color: MaterialColor) {
 
@@ -61,8 +43,11 @@ enum class ColorStyle constructor(@param:StringRes @get:StringRes val nameString
             R.string.teal, Teal()
     ),
 
-    // FIXME
     GREEN(
+            R.string.green, Green()
+    ),
+
+    LIGHT_GREEN(
             R.string.light_green, LightGreen()
     ),
 
