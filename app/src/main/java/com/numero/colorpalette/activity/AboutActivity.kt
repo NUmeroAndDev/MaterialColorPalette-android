@@ -22,7 +22,7 @@ class AboutActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        versionTextView.text = String.format("Ver %s", BuildConfig.VERSION_NAME)
+        versionTextView.text = "Ver ${BuildConfig.VERSION_NAME}"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
