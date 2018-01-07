@@ -32,10 +32,8 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener, ColorL
 
         val pagerAdapter = PagerAdapter(applicationContext, supportFragmentManager)
 
-        viewPager.apply {
-            adapter = pagerAdapter
-            addOnPageChangeListener(this@MainActivity)
-        }
+        viewPager.adapter = pagerAdapter
+        viewPager.addOnPageChangeListener(this)
 
         tabs.setupWithViewPager(viewPager)
 

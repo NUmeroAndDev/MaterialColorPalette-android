@@ -108,12 +108,10 @@ class ColorListFragment : Fragment() {
 
         private val BUNDLE_MATERIAL_COLOR = "MATERIAL_COLOR"
 
-        fun newInstance(materialColor: MaterialColor): ColorListFragment {
-            val fragment = ColorListFragment()
-            val args = Bundle()
-            args.putSerializable(BUNDLE_MATERIAL_COLOR, materialColor)
-            fragment.arguments = args
-            return fragment
+        fun newInstance(materialColor: MaterialColor): ColorListFragment = ColorListFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(BUNDLE_MATERIAL_COLOR, materialColor)
+            }
         }
     }
 }
