@@ -10,17 +10,19 @@ import com.numero.colorpalette.model.ColorStyle
 
 class PagerAdapter(private val context: Context, fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 
+    private val colors: Array<ColorStyle> = ColorStyle.values()
+
     override fun getItem(position: Int): Fragment {
-        val style = ColorStyle.values()[position]
+        val style = colors[position]
         return ColorListFragment.newInstance(style.color)
     }
 
     override fun getCount(): Int {
-        return ColorStyle.values().size
+        return colors.size
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        val style = ColorStyle.values()[position]
+        val style = colors[position]
         return context.getString(style.nameStringRes)
     }
 }

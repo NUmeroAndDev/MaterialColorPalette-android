@@ -39,79 +39,79 @@ class ColorListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        colorState50View.colorCodeText = materialColor?.color50
-        colorState100View.colorCodeText = materialColor?.color100
-        colorState200View.colorCodeText = materialColor?.color200
-        colorState300View.colorCodeText = materialColor?.color300
-        colorState400View.colorCodeText = materialColor?.color400
-        colorState500View.colorCodeText = materialColor?.color500
-        colorState600View.colorCodeText = materialColor?.color600
-        colorState700View.colorCodeText = materialColor?.color700
-        colorState800View.colorCodeText = materialColor?.color800
-        colorState900View.colorCodeText = materialColor?.color900
-        colorStateA100View.colorCodeText = materialColor?.colorA100
-        colorStateA200View.colorCodeText = materialColor?.colorA200
-        colorStateA400View.colorCodeText = materialColor?.colorA400
-        colorStateA700View.colorCodeText = materialColor?.colorA700
+        val materialColor = materialColor ?: return
+
+        colorState50View.colorCodeText = materialColor.color50
+        colorState100View.colorCodeText = materialColor.color100
+        colorState200View.colorCodeText = materialColor.color200
+        colorState300View.colorCodeText = materialColor.color300
+        colorState400View.colorCodeText = materialColor.color400
+        colorState500View.colorCodeText = materialColor.color500
+        colorState600View.colorCodeText = materialColor.color600
+        colorState700View.colorCodeText = materialColor.color700
+        colorState800View.colorCodeText = materialColor.color800
+        colorState900View.colorCodeText = materialColor.color900
+        colorStateA100View.colorCodeText = materialColor.colorA100
+        colorStateA200View.colorCodeText = materialColor.colorA200
+        colorStateA400View.colorCodeText = materialColor.colorA400
+        colorStateA700View.colorCodeText = materialColor.colorA700
 
         colorState50View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color50)
+            listener?.onClickColor(materialColor.color50)
         }
         colorState100View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color100)
+            listener?.onClickColor(materialColor.color100)
         }
         colorState200View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color200)
+            listener?.onClickColor(materialColor.color200)
         }
         colorState300View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color300)
+            listener?.onClickColor(materialColor.color300)
         }
         colorState400View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color400)
+            listener?.onClickColor(materialColor.color400)
         }
         colorState500View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color500)
+            listener?.onClickColor(materialColor.color500)
         }
         colorState600View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color600)
+            listener?.onClickColor(materialColor.color600)
         }
         colorState700View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color700)
+            listener?.onClickColor(materialColor.color700)
         }
         colorState800View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color800)
+            listener?.onClickColor(materialColor.color800)
         }
         colorState900View.setOnClickListener {
-            listener?.onClickColor(materialColor?.color900)
+            listener?.onClickColor(materialColor.color900)
         }
         colorStateA100View.setOnClickListener {
-            listener?.onClickColor(materialColor?.colorA100)
+            listener?.onClickColor(materialColor.colorA100)
         }
         colorStateA200View.setOnClickListener {
-            listener?.onClickColor(materialColor?.colorA200)
+            listener?.onClickColor(materialColor.colorA200)
         }
         colorStateA400View.setOnClickListener {
-            listener?.onClickColor(materialColor?.colorA400)
+            listener?.onClickColor(materialColor.colorA400)
         }
         colorStateA700View.setOnClickListener {
-            listener?.onClickColor(materialColor?.colorA700)
+            listener?.onClickColor(materialColor.colorA700)
         }
     }
 
     interface ColorListFragmentListener {
-        fun onClickColor(color: String?)
+        fun onClickColor(color: String)
     }
 
     companion object {
 
         private val BUNDLE_MATERIAL_COLOR = "MATERIAL_COLOR"
 
-        fun newInstance(materialColor: MaterialColor): ColorListFragment {
-            val fragment = ColorListFragment()
-            val args = Bundle()
-            args.putSerializable(BUNDLE_MATERIAL_COLOR, materialColor)
-            fragment.arguments = args
-            return fragment
+        fun newInstance(materialColor: MaterialColor): ColorListFragment = ColorListFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(BUNDLE_MATERIAL_COLOR, materialColor)
+            }
         }
     }
 }

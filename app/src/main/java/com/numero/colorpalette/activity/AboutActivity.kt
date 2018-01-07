@@ -22,7 +22,7 @@ class AboutActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        versionTextView.text = String.format("Ver %s", BuildConfig.VERSION_NAME)
+        versionTextView.text = "Ver ${BuildConfig.VERSION_NAME}"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -45,15 +45,12 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun startSourceView() {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(getString(R.string.source_url))
-        startActivity(intent)
+        startActivity(Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(getString(R.string.source_url))
+        })
     }
 
     companion object {
-
-        fun createIntent(context: Context): Intent {
-            return Intent(context, AboutActivity::class.java)
-        }
+        fun createIntent(context: Context): Intent = Intent(context, AboutActivity::class.java)
     }
 }

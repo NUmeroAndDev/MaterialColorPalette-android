@@ -21,37 +21,41 @@ class ColorStateView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     var colorCodeText: String? = null
         set(value) {
-            if (value.isNullOrEmpty()) {
-                visibility = View.GONE
-                return
-            }
             colorCodeTextView.text = value
-            visibility = View.VISIBLE
-            Observable.just(value)
-                    .map { Color.parseColor(it) }
-                    .doOnNext {
-                        visibility = View.VISIBLE
-                        setBackgroundColor(it)
-                    }
-                    .map { ColorUtil.getTextColor(it) }
-                    .subscribe({
-                        titleTextView.setTextColor(it)
-                        colorCodeTextView.setTextColor(it)
-                    }, {
-                        visibility = View.GONE
-                    })
+            setColorCode(value)
         }
 
     init {
         View.inflate(context, R.layout.view_color_state, this)
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ColorStateView)
-        titleText = a.getString(R.styleable.ColorStateView_title)
-        colorCodeText = a.getString(R.styleable.ColorStateView_colorCode)
-        a.recycle()
+        context.obtainStyledAttributes(attrs, R.styleable.ColorStateView).apply {
+            titleText = getString(R.styleable.ColorStateView_title)
+            colorCodeText = getString(R.styleable.ColorStateView_colorCode)
+            recycle()
+        }
     }
 
     override fun setOnClickListener(l: View.OnClickListener?) {
         parentLayout.setOnClickListener(l)
+    }
+
+    private fun setColorCode(code: String?) {
+        if (code.isNullOrEmpty()) {
+            visibility = View.GONE
+            return
+        }
+        visibility = View.VISIBLE
+        Observable.just(code)
+                .map { Color.parseColor(it) }
+                .doOnNext {
+                    setBackgroundColor(it)
+                }
+                .map { ColorUtil.getTextColor(it) }
+                .subscribe({
+                    titleTextView.setTextColor(it)
+                    colorCodeTextView.setTextColor(it)
+                }, {
+                    visibility = GONE
+                })
     }
 }
